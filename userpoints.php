@@ -31,20 +31,18 @@ class plgH5pUserpoints extends JPlugin
 			$db->setQuery($query);
 			$exist = $db->loadResult();
 			if (empty($exist)) {
-				$insertdata = array(
-					'rule_name' => $db->Quote('Results H5P quizzes'),
-					'rule_description' => $db->Quote('Give points to user when the quiez end'),
-					'rule_plugin' => $db->Quote('com_h5p'),
-					'plugin_function' => $db->Quote('plgaup_h5presults'),
-					'access' => 1,
-					'points' => 0,
-					'published' => 1,
-					'system' => 0,
-					'autoapproved' => 1
-				);
-				$query = 'INSERT INTO  #__alpha_userpoints_rules (' . implode(',', array_keys($insertdata)) . ') VALUES (' . implode(',', $insertdata) . ')';
-				$db->setQuery($query);
-				$db->execute();
+				$db_object = new \stdClass;
+				$db_object->rule_name = 'Results H5P quizzes';
+				$db_object->rule_description = 'Give points to user when the quiez end';
+				$db_object->rule_plugin = 'com_h5p';
+				$db_object->plugin_function = 'plgaup_h5presults';
+				$db_object->access = 1;
+				$db_object->points = 0;
+				$db_object->published = 1;
+				$db_object->system = 0;
+				$db_object->autoapproved = 1;
+
+				$db->insertObject('#__alpha_userpoints_rules', $db_object);
 			}
 
 			if (!$user_id) {
