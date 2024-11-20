@@ -36,7 +36,11 @@ class plgH5pUserpoints extends JPlugin
 				$db_object->rule_description = 'Give points to user when the quiez end';
 				$db_object->rule_plugin = 'com_h5p';
 				$db_object->plugin_function = 'plgaup_h5presults';
-				$db_object->points = 0;
+				$db_object->sections = '';
+				$db_object->categories = '';
+				$db_object->content_items = '';
+				$db_object->exclude_items = '';
+				$db_object->emailbody = '';
 				$db_object->published = 1;
 
 				$db->insertObject('#__alpha_userpoints_rules', $db_object);
